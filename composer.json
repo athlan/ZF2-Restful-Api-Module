@@ -1,0 +1,37 @@
+{
+    "name": "vgroup/restful-api-module",
+    "description": "Zend Framework 2 Module that provides Restful Module Tools",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "rest",
+        "restful",
+        "api",
+        "module",
+        "zf2"
+    ],
+    "homepage": "http://www.vgroup.pl/",
+    "authors": [
+        {
+            "name": "Piotr Pelczar",
+            "email": "me@athlan.pl",
+            "homepage": "http://www.athlan.pl/"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zend-stdlib": "2.*",
+        "zendframework/zend-form": "2.*",
+        "zendframework/zend-mvc": "2.*",
+        "zendframework/zend-servicemanager": "2.*"
+    },
+    "require-dev": {
+        "zendframework/zend-developer-tools": "dev-master"
+    }
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": {
+            "ModuleRestfulApi\\": ""
+        }
+    }
+}
