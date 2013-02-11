@@ -27,7 +27,7 @@
     },
     "require-dev": {
         "zendframework/zend-developer-tools": "dev-master"
-    }
+    },
     "minimum-stability": "dev",
     "autoload": {
         "psr-0": {
