@@ -49,7 +49,10 @@ class Module
 	 * @return null|\Zend\Http\PhpEnvironment\Response
 	 */
 	public function postProcess(MvcEvent $e)
-	{
+  {
+    if(null === $e->getRouteMatch() || null === $e->getRouteMatch()->getMatchedRouteName() || $e->getRouteMatch()->getMatchedRouteName() != 'api')
+      return;
+    
 		/** @var \Zend\Di\Di $di */
 		$di = $e->getTarget()->getServiceLocator()->get('di');
     
@@ -88,6 +91,9 @@ class Module
 	 */
 	public function errorProcess(MvcEvent $e)
 	{
+        if(null === $e->getRouteMatch() || null === $e->getRouteMatch()->getMatchedRouteName() || $e->getRouteMatch()->getMatchedRouteName() != 'api')
+          return;
+        
 		/** @var \Zend\Di\Di $di */
 		$di = $e->getApplication()->getServiceManager()->get('di');
 

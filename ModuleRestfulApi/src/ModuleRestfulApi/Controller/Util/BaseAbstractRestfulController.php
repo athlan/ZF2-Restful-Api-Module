@@ -24,7 +24,7 @@ abstract class BaseAbstractRestfulController extends AbstractRestfulController
              * @todo Determine requirements for when route match is missing.
              *       Potentially allow pulling directly from request metadata?
              */
-            throw new Exception\DomainException('Missing route matches; unsure how to retrieve action');
+            throw new \Zend\Mvc\Exception\DomainException('Missing route matches; unsure how to retrieve action');
         }
     
         $request = $e->getRequest();
@@ -74,14 +74,14 @@ abstract class BaseAbstractRestfulController extends AbstractRestfulController
                 case 'delete':
                     if (null === $id = $routeMatch->getParam('id')) {
                         if (!($id = $request->getQuery()->get('id', false))) {
-                            throw new Exception\DomainException('Missing identifier');
+                            throw new \Zend\Mvc\Exception\DomainException('Missing identifier');
                         }
                     }
                     $action = 'delete';
                     $return = $this->delete($id);
                     break;
                 default:
-                    throw new Exception\DomainException('Invalid HTTP method!');
+                    throw new \Zend\Mvc\Exception\DomainException('Invalid HTTP method!');
             }
     
             $routeMatch->setParam('action', $action);
@@ -107,7 +107,7 @@ abstract class BaseAbstractRestfulController extends AbstractRestfulController
     {
         if (null === $id = $routeMatch->getParam('id')) {
             if (!($id = $request->getQuery()->get('id', false))) {
-                throw new Exception\DomainException('Missing identifier');
+                throw new \Zend\Mvc\Exception\DomainException('Missing identifier');
             }
         }
         

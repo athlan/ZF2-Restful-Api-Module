@@ -5,7 +5,7 @@ namespace ModuleRestfulApi\PostProcessor;
 /**
  *
  */
-use ModuleApi\Response\AbstractResponse;
+use ModuleRestfulApi\Response\AbstractResponse;
 
 abstract class AbstractPostProcessor
 {
