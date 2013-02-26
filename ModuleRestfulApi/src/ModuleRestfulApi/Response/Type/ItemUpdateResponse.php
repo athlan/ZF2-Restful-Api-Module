@@ -2,7 +2,7 @@
 
 namespace ModuleRestfulApi\Response\Type;
 
-use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterInterface;
 
 use ModuleRestfulApi\Response\ResponeItem;
 
@@ -18,7 +18,7 @@ class ItemUpdateResponse extends MultiMessageResultStatusResponse
     
     /**
      *
-     * @var \Zend\InputFilter\InputFilter
+     * @var \Zend\InputFilter\InputFilterInterface
      */
     private $inputFilter = null;
     
@@ -38,23 +38,25 @@ class ItemUpdateResponse extends MultiMessageResultStatusResponse
     }
     
 	  /**
-     * @param \Zend\InputFilter\InputFilter $inputFilter
+     * @param \Zend\InputFilter\InputFilterInterface $inputFilter
      */
-    public function setInputFilter(InputFilter $inputFilter) {
+    public function setInputFilter(InputFilterInterface $inputFilter) {
         $this->inputFilter = $inputFilter;
     }
     
-	  public function flushInputFilter() {
+    public function flushInputFilter() {
         if(null === $this->inputFilter)
             throw new \Exception("No InputFilter to flush");
         
-        if($this->inputFilter->isValid())
+        if($this->inputFilter->isValid()) {
             $this->setStatus(self::STATUS_SUCCESS);
+        }
         else {
             $this->setStatus(self::STATUS_FAILURE);
             $this->setStatusCode(self::STATUS_CODE_VALIDATION_ERROR);
         }
-        
+//         var_dump($this->inputFilter->getMessages());exit;
+//         die('aa');
         foreach ($this->inputFilter->getMessages() as $key => $messages) {
             $this->addMessage($key . ": " . implode(' ', array_values($messages)));
         }
