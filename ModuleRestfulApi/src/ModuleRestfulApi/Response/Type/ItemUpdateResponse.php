@@ -55,11 +55,24 @@ class ItemUpdateResponse extends MultiMessageResultStatusResponse
             $this->setStatus(self::STATUS_FAILURE);
             $this->setStatusCode(self::STATUS_CODE_VALIDATION_ERROR);
         }
-//         var_dump($this->inputFilter->getMessages());exit;
-//         die('aa');
+        
         foreach ($this->inputFilter->getMessages() as $key => $messages) {
-            $this->addMessage($key . ": " . implode(' ', array_values($messages)));
+            $this->addMessage($key . ": " . $this->getMessgeMerged($messages));
         }
+    }
+    
+    protected function getMessgeMerged($messages) {
+        $message = '';
+        
+        if(is_array($messages)) {
+            foreach ($messages as $key => $messagesDeep)
+                $message .= $key . ': ' . $this->getMessgeMerged($messagesDeep);
+        }
+        else {
+            $message = $messages . '; ';
+        }
+        
+        return $message;
     }
     
     public function toArray() {
