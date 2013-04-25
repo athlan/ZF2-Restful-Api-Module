@@ -15,14 +15,20 @@ class ItemsListResponse extends AbstractResponse
      * 
      * @param $item ModuleModel\Entity\Util\ResponeItem
      */
-    public function addItem(ResponeItem $item) {
+    public function addItem($item) {
+        if($item instanceof ResponeItem) {
+            $item = $item->toResponseArray();
+        }
+        
+        if(!is_array($item))
+            throw new \Exception("Cannot add the item to response. It have to be an array or instance of ResponeItem");
+        
         $this->items[] = $item;
     }
     
     public function addItems(array $items) {
         foreach($items as $item) {
-            if($item instanceof ResponeItem)
-                $this->addItem($item);
+            $this->addItem($item);
         }
     }
     
@@ -41,8 +47,7 @@ class ItemsListResponse extends AbstractResponse
         $data['items'] = [];
         
         foreach($this->items as $item) {
-            /* @var $item \ModuleModel\Entity\Util\ResponeItem */
-            $data['items'][] = $item->toResponseArray();
+            $data['items'][] = $item;
         }
         
         return $data;

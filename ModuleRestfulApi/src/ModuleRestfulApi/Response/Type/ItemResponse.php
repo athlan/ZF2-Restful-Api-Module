@@ -18,7 +18,14 @@ class ItemResponse extends AbstractResponse
         $this->setStatusCode(AbstractResponse::STATUS_CODE_NOT_FOUND);
     }
     
-    public function setItem(ResponeItem $item) {
+    public function setItem($item) {
+        if($item instanceof ResponeItem) {
+            $item = $item->toResponseArray();
+        }
+        
+        if(!is_array($item))
+            throw new \Exception("Cannot add the item to response. It have to be an array or instance of ResponeItem");
+        
         $this->item = $item;
         
         if(null !== $item) {
@@ -36,7 +43,7 @@ class ItemResponse extends AbstractResponse
     public function toArray() {
         $data = parent::toArray();
         
-        $data['item'] = (null !== $this->item) ? $this->item->toResponseArray() : null;
+        $data['item'] = (null !== $this->item) ? $this->item : null;
         
         return $data;
     }
