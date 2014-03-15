@@ -91,9 +91,14 @@ class Module
 	 */
 	public function errorProcess(MvcEvent $e)
 	{
-        if(null === $e->getRouteMatch() || null === $e->getRouteMatch()->getMatchedRouteName() || $e->getRouteMatch()->getMatchedRouteName() != 'api')
+        if(null === $e->getRouteMatch() || null === $e->getRouteMatch()->getMatchedRouteName())
           return;
         
+		$params = $e->getRouteMatch()->getParams();
+		
+		if(!isset($params['api']))
+		  return;
+		
 		/** @var \Zend\Di\Di $di */
 		$di = $e->getApplication()->getServiceManager()->get('di');
 

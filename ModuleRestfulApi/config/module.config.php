@@ -36,10 +36,10 @@ return array(
                         'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'formatter'  => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'         => '[a-zA-Z0-9_-]*',
-                        'api'        => '1',
                     ),
                     'defaults' => array(
                         '__NAMESPACE__' => 'ModuleApi\Controller',
+                        'api' => '1',
                     ),
                 ),
             ),
