@@ -33,7 +33,7 @@ abstract class AbstractResponse
      * @param mixed $value
      */
     public function setParam($key, $value) {
-        $this->param[$key] = $value;
+        $this->params[$key] = $value;
     }
     
     /**
@@ -44,11 +44,11 @@ abstract class AbstractResponse
     }
     
     public function unsetParam($key) {
-        unset($this->param[$key]);
+        unset($this->params[$key]);
     }
     
     public function isParam($key) {
-        return isset($this->param[$key]);
+        return isset($this->params[$key]);
     }
     
     public function getParams() {

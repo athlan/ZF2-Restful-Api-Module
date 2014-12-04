@@ -83,7 +83,7 @@ abstract class BaseAbstractRestfulController extends AbstractRestfulController
                 default:
                     throw new \Zend\Mvc\Exception\DomainException('Invalid HTTP method!');
             }
-    
+            
             $routeMatch->setParam('action', $action);
         }
     

@@ -26,7 +26,7 @@ class ItemsListResponse extends AbstractResponse
         $this->items[] = $item;
     }
     
-    public function addItems(array $items) {
+    public function addItems($items) {
         foreach($items as $item) {
             $this->addItem($item);
         }
